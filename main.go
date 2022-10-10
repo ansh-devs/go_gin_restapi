@@ -16,6 +16,7 @@ func main() {
 	// models.Message()
 	// repository.Message()
 	r := gin.Default()
+	r.TrustedProxies = nil
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK,
 			gin.H{
@@ -23,7 +24,7 @@ func main() {
 			})
 	})
 	r.StaticFile("/json", "./jsn.json")
-	r.Run() // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
+	r.Run(":8080") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 	var a string = "This is a string.."
 	var b = &a
 	println(b)
