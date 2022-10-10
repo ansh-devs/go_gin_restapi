@@ -16,7 +16,7 @@ func main() {
 	// models.Message()
 	// repository.Message()
 	r := gin.Default()
-	r.TrustedProxies = nil
+	r.SetTrustedProxies(nil)
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK,
 			gin.H{
