@@ -1,31 +1,28 @@
 package main
 
 import (
-	"net/http"
-
-	"github.com/gin-gonic/gin"
-	// 	driver "anshdevs.in/golang/go/driver"
-	// 	handler "anshdevs.in/golang/go/handler"
-	// 	models "anshdevs.in/golang/go/models"
-	// 	repository "anshdevs.in/golang/go/repository"
+    "net/http"
 )
 
+// create a handler struct
+type HttpHandler struct{}
+
+// implement `ServeHTTP` method on `HttpHandler` struct
+func (h HttpHandler) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+
+    // create response binary data
+    data := []byte("Hello World!") // slice of bytes
+
+    // write `data` to response
+    res.Write(data)
+}
+
 func main() {
-	// driver.Message()
-	// handler.Message()
-	// models.Message()
-	// repository.Message()
-	r := gin.Default()
-	r.SetTrustedProxies(nil)
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(http.StatusOK,
-			gin.H{
-				"message": "pong",
-			})
-	})
-	r.StaticFile("/json", "./jsn.json")
-	r.Run(":80") // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
-	var a string = "This is a string.."
-	var b = &a
-	println(b)
+
+    // create a new handler
+    handler := HttpHandler{}
+
+    // listen and serve
+    http.ListenAndServe(":9000", handler)
+
 }
